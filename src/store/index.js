@@ -3,9 +3,9 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     todos: [
-      { id: 1, text: 'Master Vue', done: false },
-      { id: 2, text: 'Build amazing apps', done: false },
-      { id: 3, text: 'Make profit', done: false },
+      { id: '1', text: 'Master Vue', done: false },
+      { id: '2', text: 'Build amazing apps', done: true },
+      { id: '3', text: 'Make profit', done: false },
     ],
   },
   mutations: {
@@ -19,7 +19,7 @@ export default createStore({
     },
     removeTodo(state, payload) {
       const todoIdx = state.todos.findIndex(todo => todo.id === payload.id);
-      state.todos.slice(todoIdx, 1);
+      state.todos.splice(todoIdx, 1);
     },
     markAsdone(state, payload) {
       const todoIdx = state.todos.findIndex(todo => todo.id === payload.id);
@@ -39,10 +39,10 @@ export default createStore({
   },
   getters: {
     todoList(state) {
-      return state.todos.filter(todo => todo.done);
+      return state.todos.filter(todo => !todo.done);
     },
     doneList(state) {
-      return state.todos.filter(todo => !todo.done);
+      return state.todos.filter(todo => todo.done);
     },
   },
 });
