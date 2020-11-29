@@ -1,5 +1,7 @@
 # todo-app
 
+Todo app Simples construido com Vue
+
 ## Project setup
 ```
 yarn install
@@ -14,11 +16,3 @@ yarn serve
 ```
 yarn build
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
