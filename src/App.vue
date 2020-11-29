@@ -12,16 +12,20 @@
 
     <component :is="activeTab"></component>
   </base-container>
+
+  <button-new></button-new>
 </template>
 
 <script>
 import TodoList from './components/TodoList';
 import DoneList from './components/DoneLIst';
+import ButtonNew from './components/ui/ButtonNew';
 
 export default {
   components: {
     TodoList,
     DoneList,
+    ButtonNew
   },
   data() {
     return {
@@ -104,8 +108,9 @@ body {
 
   &__item--active {
     color: $brown1;
-    font-size: 1.4rem;
+    // font-size: 1.4rem;
     font-weight: 700;
+    transform: scale(1.8);
   }
 }
 </style>

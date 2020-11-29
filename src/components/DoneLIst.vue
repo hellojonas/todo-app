@@ -1,16 +1,30 @@
 <template>
   <ul class="done-list">
-    Done
+    <todo-item
+      v-for="done in doneList"
+      :key="done.id"
+      :id="done.id"
+      :text="done.text"
+      mode="done"
+    ></todo-item>
   </ul>
 </template>
 
 <script>
-export default {
+import TodoItem from './ui/TodoItem.vue';
 
-}
+export default {
+  components: {
+    TodoItem,
+  },
+  computed: {
+    doneList() {
+      return this.$store.getters.doneList;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
 @import '@/scss/main.scss';
-
 </style>
