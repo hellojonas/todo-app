@@ -50,14 +50,12 @@ export default {
   margin-bottom: 1.5rem;
   background-color: $brown2;
   border-radius: 100px;
+  box-shadow: $shadow-md;
 
   &__text {
     font-size: 1.1rem;
+    letter-spacing: 1px;
     flex: 1;
-  }
-
-  &__icon-box {
-    
   }
 
   &__icon {
@@ -68,10 +66,6 @@ export default {
     &:not(:last-child) {
       margin-right: .8rem;
     }
-  }
-
-  &__icon--delete {
-
   }
 }
 

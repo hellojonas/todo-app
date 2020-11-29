@@ -7,12 +7,6 @@
   </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style lang="scss">
   @import '@/scss/main.scss';
 
@@ -20,8 +14,8 @@ export default {
     position: fixed;
     bottom: 4rem;
     right: 4rem;
-    background-color: $brown1;
-    fill: $text-dark;
+    background-color: $red1;
+    fill: $text-light;
     height: 5rem;
     width: 5rem;
     border-radius: 50%;

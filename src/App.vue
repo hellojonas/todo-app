@@ -9,27 +9,31 @@
       <h2 class="tab__item" :class="todoActive" @click="setActiveTab('todo-list')">Todos</h2>
       <h2 class="tab__item" :class="doneActive" @click="setActiveTab('done-list')">Done</h2>
     </div>
-
     <component :is="activeTab"></component>
   </base-container>
 
-  <button-new></button-new>
+  <todo-input v-if="todoInputIsVisible" @input-closed="hideInput"></todo-input>
+
+  <button-new v-if="!todoInputIsVisible" @click="showTodoInput"></button-new>
 </template>
 
 <script>
 import TodoList from './components/TodoList';
 import DoneList from './components/DoneLIst';
 import ButtonNew from './components/ui/ButtonNew';
+import TodoInput from './components/ui/TodoInput';
 
 export default {
   components: {
     TodoList,
     DoneList,
-    ButtonNew
+    ButtonNew,
+    TodoInput
   },
   data() {
     return {
       activeTab: 'todo-list',
+      todoInputIsVisible: false
     };
   },
   computed: {
@@ -47,6 +51,12 @@ export default {
   methods: {
     setActiveTab(tab) {
       this.activeTab = tab;
+    },
+    showTodoInput() {
+      this.todoInputIsVisible = true;
+    },
+    hideInput() {
+      this.todoInputIsVisible = false;
     }
   }
 };
@@ -69,6 +79,7 @@ html {
 }
 
 body {
+  font-family: 'Lato', arial, sans-serif;
   font-size: 1.2rem;
   background-color: $purple1;
   color: $text-dark;
@@ -80,6 +91,7 @@ body {
   align-items: center;
   background-color: $purple2;
   margin-bottom: 4rem;
+  box-shadow: $shadow-md;
 
   &__title {
     color: $text-light;
@@ -108,7 +120,6 @@ body {
 
   &__item--active {
     color: $brown1;
-    // font-size: 1.4rem;
     font-weight: 700;
     transform: scale(1.8);
   }
