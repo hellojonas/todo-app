@@ -1,7 +1,10 @@
 <template>
+  <teleport to="body">
+    <div class="overlay" v-if="todoInputIsVisible" @click="hideInput"></div>
+  </teleport>
   <header class="header">
     <base-container>
-      <h1 class="header__title">TODO</h1>
+      <h1 class="header__title">Todo   App</h1>
     </base-container>
   </header>
   <base-container>
@@ -9,10 +12,14 @@
       <h2 class="tab__item" :class="todoActive" @click="setActiveTab('todo-list')">Todos</h2>
       <h2 class="tab__item" :class="doneActive" @click="setActiveTab('done-list')">Done</h2>
     </div>
-    <component :is="activeTab"></component>
+    <transition name="tab" mode="out-in">
+      <component :is="activeTab" class="main"></component>
+    </transition>
   </base-container>
 
-  <todo-input v-if="todoInputIsVisible" @input-closed="hideInput"></todo-input>
+  <transition name="input">
+    <todo-input v-if="todoInputIsVisible" @input-saved="hideInput"></todo-input>
+  </transition>
 
   <button-new v-if="!todoInputIsVisible" @click="showTodoInput"></button-new>
 </template>
@@ -67,6 +74,10 @@ export default {
 
 html {
   font-size: 62.5%;
+
+  @media only screen and (min-width: 48em) {
+    font-size: 70%;
+  }
 }
 
 *,
@@ -83,6 +94,16 @@ body {
   font-size: 1.2rem;
   background-color: $purple1;
   color: $text-dark;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(8, 8, 8, 0.9);
+  z-index: 20;
 }
 
 .header {
@@ -106,7 +127,6 @@ body {
   justify-content: center;
   max-width: 20rem;
   margin: auto;
-  margin-bottom: 3rem;
 
   &__item {
     font-size: 1rem;
@@ -116,6 +136,13 @@ body {
     &:not(:last-child) {
       margin-right: 8rem;
     }
+
+    @media only screen and (min-width: 48em) {
+      transition: all .3s;
+      &:hover {
+        color: $brown1;
+      }
+    }
   }
 
   &__item--active {
@@ -123,5 +150,45 @@ body {
     font-weight: 700;
     transform: scale(1.8);
   }
+}
+
+.main {
+  position: relative;
+  max-width: 62rem;
+  width: 100%;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.tab-enter-from,
+.tab-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+.tab-enter-active,
+.tab-leave-active {
+  transition: all .4s;
+}
+
+.tab-enter-to,
+.tab-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.input-enter-from,
+.input-leave-to {
+  transform: translate(-50%, -10%) scale(0.8);
+  opacity: 0;
+}
+.input-enter-active,
+.input-leave-active {
+  transition: opacity .5s, transform .4s;
+}
+
+.input-enter-to,
+.input-leave-from {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
 </style>

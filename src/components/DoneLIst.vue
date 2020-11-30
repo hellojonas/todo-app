@@ -1,12 +1,14 @@
 <template>
   <ul class="done-list">
-    <todo-item
-      v-for="done in doneList"
-      :key="done.id"
-      :id="done.id"
-      :text="done.text"
-      mode="done"
-    ></todo-item>
+    <transition-group name="todo">
+      <todo-item
+        v-for="done in doneList"
+        :key="done.id"
+        :id="done.id"
+        :text="done.text"
+        mode="done"
+      ></todo-item>
+    </transition-group>
   </ul>
 </template>
 
@@ -27,4 +29,18 @@ export default {
 
 <style lang="scss">
 @import '@/scss/main.scss';
+
+.todo-leave-from {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+.todo-leave-to {
+  transform: translateX(4rem) scale(1);
+  opacity: 0;
+}
+
+.todo-leave-active {
+  transition: transform 0.4s, opacity 0.4s;
+}
 </style>

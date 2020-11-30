@@ -3,9 +3,9 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     todos: [
+      { id: '3', text: 'Learn Vue', done: true },
+      { id: '2', text: 'Build amazing apps', done: false },
       { id: '1', text: 'Master Vue', done: false },
-      { id: '2', text: 'Build amazing apps', done: true },
-      { id: '3', text: 'Make profit', done: false },
     ],
   },
   mutations: {

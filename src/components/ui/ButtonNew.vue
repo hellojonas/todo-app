@@ -31,9 +31,17 @@
       width: 2.4rem;
     }
 
-    // &:hover {
-    //   transform: translateY(-3px);
-    //   box-shadow: $shadow-lg;
-    // }
+    @media only screen and (min-width: 48em) {
+      transition: all .3s;
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-lg;
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        box-shadow: $shadow-md;
+      }
+    }
   }
 </style>

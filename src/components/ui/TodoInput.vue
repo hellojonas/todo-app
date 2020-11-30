@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="overlay" @click="closeInput"></div>
-    <form @submit.prevent="saveTodo" class="form">
-      <input
-        class="form__input"
-        type="text"
-        placeholder="Add your todo"
-        v-model.trim="todoText"
-      />
-      <span v-if="!!error" class="form__text-error">{{ error }}</span>
-      <div class="form__button-box">
-        <button type="buttton" class="form__button-add">Add</button>
-      </div>
-    </form>
-  </div>
+  <form @submit.prevent="saveTodo" class="form">
+    <input
+      class="form__input"
+      type="text"
+      placeholder="Add your todo"
+      v-model.trim="todoText"
+      ref="todoInput"
+    />
+    <span v-if="!!error" class="form__text-error">{{ error }}</span>
+    <div class="form__button-box">
+      <button type="buttton" class="form__button-add">Add</button>
+    </div>
+  </form>
 </template>
 
 <script>
 export default {
-  emits: ['input-closed'],
+  emits: ['input-saved'],
   data() {
     return {
       todoText: '',
@@ -27,7 +25,7 @@ export default {
   },
   methods: {
     closeInput() {
-      this.$emit('input-closed');
+      this.$emit('input-saved');
     },
     saveTodo() {
       this.error = null;
@@ -42,21 +40,14 @@ export default {
       this.todoText = '';
     },
   },
+  mounted() {
+    this.$refs.todoInput.focus();
+  }
 };
 </script>
 
 <style lang="scss">
 @import '@/scss/main.scss';
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(8, 8, 8, 0.9);
-  z-index: 20;
-}
 
 .form {
   position: fixed;
@@ -102,6 +93,21 @@ export default {
     border-radius: 100px;
     box-shadow: $shadow-md;
     cursor: pointer;
+    outline: none;
+
+    @media only screen and (min-width: 48em) {
+      transition: transform 0.3s, box-shadow 0.3s;
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-lg;
+      }
+
+      &:active {
+        outline: none;
+        transform: translateY(-1px);
+        box-shadow: $shadow-md;
+      }
+    }
   }
 }
 </style>

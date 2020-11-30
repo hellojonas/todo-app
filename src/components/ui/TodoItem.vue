@@ -51,6 +51,7 @@ export default {
   background-color: $brown2;
   border-radius: 100px;
   box-shadow: $shadow-md;
+  width: 100%;
 
   &__text {
     font-size: 1.1rem;
@@ -65,6 +66,25 @@ export default {
     
     &:not(:last-child) {
       margin-right: .8rem;
+    }
+
+    @media only screen and (min-width: 48em) {
+      transition: all .3s;
+      &:hover {
+        fill: $red1;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 38.75em) {
+    margin-bottom: 2rem;
+  }
+
+  @media only screen and (min-width: 48em) {
+    transition: all .3s;
+    &:hover {
+      background-color: $brown1;
     }
   }
 }
