@@ -1,6 +1,6 @@
 # todo-app
 
-Todo app Simples construido com Vue
+Todo app Simples construido com Vue. Veja a [demo](https://v-todo-app.netlify.app).
 
 # Screenshots
 
